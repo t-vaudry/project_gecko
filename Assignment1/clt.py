@@ -13,9 +13,8 @@ clt = Flask(__name__)
 Bootstrap(clt)
 api = Api(clt)
 
-#http_server = "ec2-52-26-40-230.us-west-2.compute.amazonaws.com"
-http_server = "127.0.0.1:80"
-conn = http.client.HTTPConnection(http_server)
+http_server = "ec2-52-26-40-230.us-west-2.compute.amazonaws.com"
+#http_server = "127.0.0.1:80"
 
 class RequestForQuote(Resource):
     def get(self):
@@ -23,6 +22,9 @@ class RequestForQuote(Resource):
 
 class JSONRequestForQuote(Resource):
     def post(self):
+        # Connect HTTP
+        conn = http.client.HTTPConnection(http_server)
+
         # Create Request for Price from request form
         rfq = RFQ(request.form['rfqId'], request.form['acctId'], request.form['productNum'], request.form['productCat'], request.form['quantity'])
 
@@ -38,18 +40,31 @@ class JSONRequestForQuote(Resource):
         # Get response
         try:
             response = conn.getresponse()
-        except http.client.RemoteDisconnected:
+        except:
+            return make_response(render_template("error.html"))
+
+        # Check status
+        try:
+            if (response.status == 404):
+                return make_response(render_template("error.html"))
+        except:
             return make_response(render_template("error.html"))
 
         # Deserialize Response for Price
         rfp = RFP(0,0)
         RFP.json_deserialize(rfp, loads(loads(response.read())))
 
+        # Close connection
+        conn.close()
+
         # Return result on webpage
         return make_response(render_template("response.html", unitPrice=rfp.unitPrice, validation=rfp.validationPeriod))
 
 class ProtoBufRequestForQuote(Resource):
     def post(self):
+        # Connect HTTP
+        conn = http.client.HTTPConnection(http_server)
+
         # Create Request for Quote
         rfq = RFQ(request.form['rfqId'], request.form['acctId'], request.form['productNum'], request.form['productCat'], request.form['quantity'])
 
@@ -66,7 +81,14 @@ class ProtoBufRequestForQuote(Resource):
         # Get response
         try:
             response = conn.getresponse()
-        except http.client.RemoteDisconnected:
+        except:
+            return make_response(render_template("error.html"))
+
+        # Check status
+        try:
+            if (response.status == 404):
+                return make_response(render_template("error.html"))
+        except:
             return make_response(render_template("error.html"))
 
         # Create ProtoBufRFP
@@ -76,6 +98,9 @@ class ProtoBufRequestForQuote(Resource):
         # Deserialize Response for Price
         rfp = RFP(0,0)
         RFP.protobuf_deserialize(rfp, protobuf_rfp)
+
+        # Close Connection
+        conn.close()
 
         # Return result on webpage
         return make_response(render_template("response.html", unitPrice=rfp.unitPrice, validation=rfp.validationPeriod))

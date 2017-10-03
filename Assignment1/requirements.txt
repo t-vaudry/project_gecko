@@ -3,3 +3,4 @@ flask-api
 flask-restful
 flask-bootstrap
 sqlalchemy
+protobuf
