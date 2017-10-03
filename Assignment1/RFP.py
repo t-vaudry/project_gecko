@@ -9,6 +9,15 @@ class RFP:
             'validationPeriod': self.validationPeriod
         }
 
+    def protobuf_serialize(self, obj):
+        obj.unitPrice = self.unitPrice
+        obj.validationPeriod = self.validationPeriod
+        return obj
+
     def json_deserialize(self, obj):
         self.unitPrice = obj['unitPrice']
         self.validationPeriod = obj['validationPeriod']
+
+    def protobuf_deserialize(self, obj):
+        self.unitPrice = obj.unitPrice
+        self.validationPeriod = obj.validationPeriod

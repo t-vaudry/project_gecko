@@ -1,0 +1,11 @@
+syntax = "proto2";
+
+package ass1;
+
+message ProtoBufRFQ {
+  required string rfqId = 1;
+  required string acctId = 2;
+  required string productNum = 3;
+  required string productCat = 4;
+  required string quantity = 5;
+}

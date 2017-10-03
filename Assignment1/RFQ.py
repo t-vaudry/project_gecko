@@ -15,9 +15,24 @@ class RFQ:
             'quantity': self.quantity
         }
 
+    def protobuf_serialize(self, obj):
+        obj.rfqId = self.rfqId
+        obj.acctId = self.acctId
+        obj.productNum = self.productNum
+        obj.productCat = self.productCat
+        obj.quantity = self.quantity
+        return obj
+
     def json_deserialize(self, obj):
         self.rfqId = obj['rfqId']
         self.acctId = obj['acctId']
         self.productNum = obj['productNum']
         self.productCat = obj['productCat']
         self.quantity = obj['quantity']
+
+    def protobuf_deserialize(self, obj):
+        self.rfqId = obj.rfqId
+        self.acctId = obj.acctId
+        self.productNum = obj.productNum
+        self.productCat = obj.productCat
+        self.quantity = obj.quantity

@@ -1,0 +1,8 @@
+syntax ="proto2";
+
+package ass1;
+
+message ProtoBufRFP {
+  required string unitPrice = 1;
+  required string validationPeriod = 2;
+}
