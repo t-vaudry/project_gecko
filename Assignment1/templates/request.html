@@ -2,19 +2,19 @@
 {% block body %}
 <body>
     <div class="jumbotron">
-        <div class="container">
-            <br>
-            <h4>Please Enter Request for Quote:</h4>
-            <br>
-            <form action="/rfq" class="form-inline" method="post">
-                <input type="text" class="form-control" placeholder="RFQ ID" name="rfqId" value="{{request.form.rfqId}}">
-                <input type="text" class="form-control" placeholder="Account ID" name="acctId" value="{{request.form.acctId}}">
-                <input type="text" class="form-control" placeholder="Product Number" name="productNum" value="{{request.form.productNum}}">
-                <input type="text" class="form-control" placeholder="Product Category" name="productCat" value="{{request.form.productCat}}">
-                <input type="text" class="form-control" placeholder="Quantity" name="quantity" value="{{request.form.quantity}}">
-                <input class="btn btn-default" type="submit" value="Request">
-            </form>
-        </div>
+        <br>
+        <h4>Please Enter Request for Quote:</h4>
+        <br>
+        <form action="" class="form-inline" method="post">
+            <input type="text" class="form-control" placeholder="RFQ ID" name="rfqId" value="{{request.form.rfqId}}">
+            <input type="text" class="form-control" placeholder="Account ID" name="acctId" value="{{request.form.acctId}}">
+            <input type="text" class="form-control" placeholder="Product Number" name="productNum" value="{{request.form.productNum}}">
+            <input type="text" class="form-control" placeholder="Product Category" name="productCat" value="{{request.form.productCat}}">
+            <input type="text" class="form-control" placeholder="Quantity" name="quantity" value="{{request.form.quantity}}">
+            <input class="btn btn-default" type="submit" formaction="/json" value="JSON Request">
+            <input class="btn btn-default" type="submit" formaction="/protobuf" value="Protocal Buffer Request">
+        </form>
+        <br>
     </div>
 </body>
 {% endblock %}

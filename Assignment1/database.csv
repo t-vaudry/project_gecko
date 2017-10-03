@@ -1,4 +1,4 @@
-ProductNum, ProductCat, UnitPrice, Stock, PriceValidation
-1,FOOD, 2.00, 20, 20/10/17
-2,FOOD, 22.00, 30, 2/10/17
-1,SPORT, 2.50, 10, 31/10/17
+Number,Category,Price,Stock,Validation
+1,FOOD,2,20,20/10/2017
+2,FOOD,22,30,2/10/2017
+1,SPORT,2.5,10,31/10/2017

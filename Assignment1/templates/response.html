@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+<body>
+    <div class="jumbotron">
+        <br>
+        <h4>Here is your Response for Price:</h4>
+        <br>
+        <p>Unit Price: {{ unitPrice }}</p><br>
+        <p>Validation Until: {{ validation }}</p>
+        <form action="" class="form-inline" method="get">
+            <input class="btn btn-default" type="submit" formaction="/rfq" value="Back">
+        </form>
+        <br>
+</div>
+</body>
+{% endblock %}
