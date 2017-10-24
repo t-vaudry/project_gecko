@@ -13,7 +13,10 @@ clt = Flask(__name__)
 Bootstrap(clt)
 api = Api(clt)
 
+# For cloud server
 http_server = "ec2-52-26-40-230.us-west-2.compute.amazonaws.com"
+
+# For local server
 #http_server = "127.0.0.1:80"
 
 class RequestForQuote(Resource):
@@ -52,7 +55,7 @@ class JSONRequestForQuote(Resource):
 
         # Deserialize Response for Price
         rfp = RFP(0,0)
-        RFP.json_deserialize(rfp, loads(loads(response.read())))
+        RFP.json_deserialize(rfp, loads(response.read()))
 
         # Close connection
         conn.close()

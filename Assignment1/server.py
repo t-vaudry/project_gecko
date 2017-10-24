@@ -39,7 +39,9 @@ class JSONResponseForPrice(Resource):
         json_rfp = dumps(rfp.json_serialize())
 
         # Send response
-        return json_rfp
+        response = make_response(json_rfp)
+        response.headers['Content-type'] = 'application/json'
+        return response
 
 class ProtoBufResponseForPrice(Resource):
     def post(self):
